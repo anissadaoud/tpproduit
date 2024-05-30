@@ -2,7 +2,7 @@
 import { onMounted, reactive } from "vue";
 import { doAjaxRequest } from "@/api";
 
-// Variable pour suivre la page actuelle
+
 let currentPage = 0;
 
 // Objet réactif pour stocker les données des produits et le nombre total de pages
