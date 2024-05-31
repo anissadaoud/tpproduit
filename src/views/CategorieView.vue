@@ -1,7 +1,6 @@
 <template>
   <main>
     <div>
-      <h1>Les catégories de produits</h1>
       <!-- Un formulaire pour saisir les valeurs de la catégorie à ajouter -->
       <form @submit.prevent="ajouteCategorie">
         <div>
@@ -44,9 +43,9 @@
 
 <script setup>
 import { reactive, onMounted } from "vue";
-import { doAjaxRequest } from "@/api";
+import { doAjaxRequest, APIError } from "../api";
 
-// Pour réinitialiser le formulaire
+// Pour réinitialiser le formuaire
 const categorieVide = {
   libelle: "",
   description: ""
@@ -83,7 +82,6 @@ function ajouteCategorie() {
     body: JSON.stringify(data.formulaireCategorie),
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json"
     },
   };
   doAjaxRequest("/api/categories", options)
@@ -100,7 +98,7 @@ function ajouteCategorie() {
  * @param entityRef l'URI de l'entité à supprimer
  */
 function deleteEntity(entityRef) {
-  doAjaxRequest(entityRef, { method: "DELETE", headers: { "Accept": "application/json" }})
+  doAjaxRequest(entityRef, { method: "DELETE" })
       .then(chargeCategories)
       .catch(showError);
 }
@@ -117,6 +115,7 @@ th {
   border: 1px solid #ddd;
   padding: 8px;
 }
+
 
 th {
   padding-top: 12px;
